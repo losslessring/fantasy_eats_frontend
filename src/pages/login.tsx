@@ -1,4 +1,4 @@
-import { ApolloError, gql, useMutation } from '@apollo/client'
+import { gql, useMutation } from '@apollo/client'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { authTokenVar, isLoggedInVar } from '../apollo'
@@ -82,6 +82,7 @@ export const Login = () => {
                         type="email"
                         placeholder="Email"
                         className="input"
+                        role="email"
                     />
                     {errors.email?.type === 'pattern' && (
                         <FormError

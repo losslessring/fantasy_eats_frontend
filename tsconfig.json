@@ -1,4 +1,23 @@
 {
+  "compilerOptions": {
+    "target":"es2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020","DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    // @ts-ignore
+    "moduleResolution": "bundler",
+    // @ts-ignore
+    "allowImportingTsExtensions": true,
+    // @ts-ignore
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": ["@testing-library/jest-dom"]
+  },
+
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
