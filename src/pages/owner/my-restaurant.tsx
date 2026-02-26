@@ -1,6 +1,12 @@
 import { gql, useQuery } from '@apollo/client'
 import { Link, useParams } from 'react-router-dom'
-import { DISH_FRAGMENT, RESTAURANT_FRAGMENT } from '../../fragments'
+import { Legend, Line, LineChart, XAxis, YAxis } from 'recharts'
+import { Dish } from '../../components/dish'
+import {
+    DISH_FRAGMENT,
+    ORDERS_FRAGMENT,
+    RESTAURANT_FRAGMENT,
+} from '../../fragments'
 import {
     myRestaurant,
     myRestaurantVariables,
@@ -16,11 +22,15 @@ export const MY_RESTAURANT_QUERY = gql`
                 menu {
                     ...DishParts
                 }
+                orders {
+                    ...OrderParts
+                }
             }
         }
     }
     ${RESTAURANT_FRAGMENT}
     ${DISH_FRAGMENT}
+    ${ORDERS_FRAGMENT}
 `
 
 interface IParams {
@@ -40,6 +50,19 @@ export const MyRestaurant = () => {
         }
     )
 
+    const renderOrders = data?.myRestaurant.restaurant?.orders.map((order) => ({
+        //createdAt: new Date(order.createdAt).toISOString(),
+        //createdAt: order.createdAt,
+        createdAt: new Date(order.createdAt).toLocaleTimeString([], {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        }),
+        Total: order.total,
+    }))
+
     return (
         <div>
             <div
@@ -53,7 +76,7 @@ export const MyRestaurant = () => {
                     {data?.myRestaurant.restaurant?.name || 'Loading...'}
                 </h2>
                 <Link
-                    to={``}
+                    to={`/restaurants/${id}/add-dish`}
                     className="mr-8 text-white bg-gray-800 py-3 px-10"
                 >
                     Add Dish &rarr;
@@ -68,7 +91,38 @@ export const MyRestaurant = () => {
             <div className="mt-10">
                 {data?.myRestaurant.restaurant?.menu.length === 0 ? (
                     <h4 className="text-xl mb-5">Please upload a dish</h4>
-                ) : null}
+                ) : (
+                    <div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
+                        {data?.myRestaurant.restaurant?.menu.map(
+                            (dish, index) => (
+                                <Dish
+                                    key={index}
+                                    name={dish.name}
+                                    description={dish.description}
+                                    price={dish.price}
+                                />
+                            )
+                        )}
+                    </div>
+                )}
+            </div>
+            <div className="mt-20 mb-10">
+                <h4 className="text-center text-2xl font-medium">Sales</h4>
+                <div className="w-full mt-10">
+                    <LineChart
+                        style={{
+                            width: '90%',
+                            aspectRatio: 4,
+                        }}
+                        responsive
+                        data={renderOrders}
+                    >
+                        <Line dataKey="Total" />
+                        <XAxis dataKey="createdAt" />
+                        <YAxis />
+                        <Legend />
+                    </LineChart>
+                </div>
             </div>
         </div>
     )
