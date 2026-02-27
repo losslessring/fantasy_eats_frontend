@@ -74,8 +74,28 @@ export const Restaurant = () => {
             current.filter((dish) => dish.dishId !== dishId)
         )
     }
+    const addOptionToItem = (dishId: number, optionName: string) => {
+        if (!isSelected(dishId)) {
+            return
+        }
+        const oldItem = getItem(dishId)
+        if (oldItem) {
+            const hasOption = Boolean(
+                oldItem.options?.find((aOption) => aOption.name == optionName)
+            )
+            if (!hasOption) {
+                removeFromOrder(dishId)
+                setOrderItems((current) => [
+                    {
+                        dishId,
+                        options: [{ name: optionName }, ...oldItem.options!],
+                    },
+                    ...current,
+                ])
+            }
+        }
+    }
     console.log(orderItems)
-
     return (
         <div>
             <title>
@@ -117,6 +137,7 @@ export const Restaurant = () => {
                             options={dish.options}
                             addItemToOrder={addItemToOrder}
                             removeFromOrder={removeFromOrder}
+                            addOptionToItem={addOptionToItem}
                         />
                     ))}
                 </div>
