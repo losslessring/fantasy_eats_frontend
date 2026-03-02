@@ -12,7 +12,6 @@ interface IDishProps {
     options?: restaurant_restaurant_restaurant_menu_options[] | null
     addItemToOrder?: (dishId: number) => void
     removeFromOrder?: (dishId: number) => void
-    addOptionToItem?: (dishId: number, option: any) => void
     children?: React.ReactNode
 }
 
@@ -27,7 +26,6 @@ export const Dish: React.FC<IDishProps> = ({
     isSelected,
     addItemToOrder,
     removeFromOrder,
-    addOptionToItem,
     children: dishOptions,
 }) => {
     const onClick = () => {
@@ -70,22 +68,7 @@ export const Dish: React.FC<IDishProps> = ({
                     {/* <div className="grid gap-2  justify-start">
                         {dishOptions}
                     </div> */}
-                    {options?.map((option, index) => (
-                        <span
-                            onClick={() =>
-                                addOptionToItem
-                                    ? addOptionToItem(id, option.name)
-                                    : null
-                            }
-                            className="flex items-center"
-                            key={index}
-                        >
-                            <h6 className="mr-2">{option.name}</h6>
-                            <h6 className="text-sm opacity-75">
-                                (${option.extra})
-                            </h6>
-                        </span>
-                    ))}
+                    {dishOptions}
                 </div>
             )}
         </div>

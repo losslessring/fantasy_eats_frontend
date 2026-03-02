@@ -1,9 +1,11 @@
-import { gql, useQuery } from '@apollo/client'
-import { Link, useParams } from 'react-router-dom'
+import { gql, useQuery, useSubscription } from '@apollo/client'
+import { useEffect } from 'react'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { Legend, Line, LineChart, XAxis, YAxis } from 'recharts'
 import { Dish } from '../../components/dish'
 import {
     DISH_FRAGMENT,
+    FULL_ORDER_FRAGMENT,
     ORDERS_FRAGMENT,
     RESTAURANT_FRAGMENT,
 } from '../../fragments'
@@ -11,6 +13,7 @@ import {
     myRestaurant,
     myRestaurantVariables,
 } from '../../__generated__/myRestaurant'
+import { pendingOrders } from '../../__generated__/pendingOrders'
 
 export const MY_RESTAURANT_QUERY = gql`
     query myRestaurant($input: MyRestaurantInput!) {
@@ -33,6 +36,15 @@ export const MY_RESTAURANT_QUERY = gql`
     ${ORDERS_FRAGMENT}
 `
 
+const PENDING_ORDERS_SUBSCRIPTION = gql`
+    subscription pendingOrders {
+        pendingOrders {
+            ...FullOrderParts
+        }
+    }
+    ${FULL_ORDER_FRAGMENT}
+`
+
 interface IParams {
     id: string
 }
@@ -51,8 +63,6 @@ export const MyRestaurant = () => {
     )
 
     const renderOrders = data?.myRestaurant.restaurant?.orders.map((order) => ({
-        //createdAt: new Date(order.createdAt).toISOString(),
-        //createdAt: order.createdAt,
         createdAt: new Date(order.createdAt).toLocaleTimeString([], {
             year: 'numeric',
             month: 'numeric',
@@ -62,6 +72,16 @@ export const MyRestaurant = () => {
         }),
         Total: order.total,
     }))
+
+    const { data: subscriptionData } = useSubscription<pendingOrders>(
+        PENDING_ORDERS_SUBSCRIPTION
+    )
+    const history = useHistory()
+    useEffect(() => {
+        if (subscriptionData?.pendingOrders.id) {
+            history.push(`/orders/${subscriptionData.pendingOrders.id}`)
+        }
+    }, [subscriptionData])
 
     return (
         <div>
