@@ -22,8 +22,14 @@ export const MyRestaurants = () => {
     return (
         <div>
             <title>My Restaurants | Fantasy Eats</title>
-            <div className="max-w-screen-2xl mx-auto mt-32">
-                <h2 className="text-4xl font-medium mb-10">My Restaurants</h2>
+            <div className="max-w-screen-3xl mx-auto">
+                <h2 className="text-red-800 text-3xl mb-2">My Restaurants</h2>
+                <Link
+                    className="text-red-800 hover:underline"
+                    to="/add-restaurant"
+                >
+                    <span> Create one &rarr;</span>
+                </Link>
                 {data?.myRestaurants.ok &&
                 data.myRestaurants.restaurants.length === 0 ? (
                     <>
@@ -31,14 +37,14 @@ export const MyRestaurants = () => {
                             You have no restaurants.
                         </h4>
                         <Link
-                            className="text-lime-600 hover:underline"
+                            className="text-red-800 hover:underline"
                             to="/add-restaurant"
                         >
-                            Create one &rarr;
+                            <span>Create one &rarr;</span>
                         </Link>
                     </>
                 ) : (
-                    <div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
+                    <div className="grid mt-4 md:grid-cols-3 gap-x-5 gap-y-10">
                         {data?.myRestaurants.restaurants.map((restaurant) => (
                             <Restaurant
                                 key={restaurant.id}

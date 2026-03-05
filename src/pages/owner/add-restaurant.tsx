@@ -103,7 +103,7 @@ export const AddRestaurant = () => {
     return (
         <div className="container">
             <title>Add Restaurant | Fantasy Eats</title>
-            <h1>Add restaurant</h1>
+            <h1 className=" text-3xl">Add restaurant</h1>
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="grid max-w-screen-sm gap-3 mt-5 w-full mb-5"

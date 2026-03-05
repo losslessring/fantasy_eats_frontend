@@ -1,5 +1,4 @@
 import { gql, useApolloClient, useMutation } from '@apollo/client'
-import React from 'react'
 
 import { useForm } from 'react-hook-form'
 import { Button } from '../../components/button'
@@ -77,12 +76,12 @@ export const EditProfile = () => {
         })
     }
     return (
-        <div className="mt-52 flex flex-col justify-center items-center">
+        <div className="mt-12 flex flex-col justify-center items-center">
             <title>Edit Profile | Fantasy Eats</title>
             <h4 className="font-semibold text-2xl mb-3">Edit Profile</h4>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="grid max-w-screen-sm gap-3 mt-5 w-full mb-5"
+                className="grid max-w-screen-sm gap-3 mt-5 mb-5"
             >
                 <input
                     {...register('email', {

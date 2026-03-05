@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: Gotika;
+  src: url("/src/assets/fonts/berry_rotunda/Berry\ Rotunda.ttf");
+}
+@theme {
+  --font-gotika: Gotika, "sans-serif";
+}
+
+body {
+  font-family: Gotika;
+  src: url("/src/assets/fonts/berry_rotunda/Berry\ Rotunda.ttf");
+}
+
+.image-border{
+/* border-2 border-solid border-red-900 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] */
+}
 .input {
     @apply focus:outline-none focus:border-gray-500 p-3 border-2  text-lg border-gray-200 transition-colors;
   }
@@ -14,4 +30,13 @@
 
 .link {
   @apply text-lime-600 hover:underline;
+}
+
+.leaflet-container {
+  height: 500px;
+  width: 100%;
+}
+
+.leaflet-control-attribution {
+  display: none;
 }
