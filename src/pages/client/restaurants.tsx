@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Restaurant } from '../../components/restaurant'
 import { CATEGORY_FRAGMENT, RESTAURANT_FRAGMENT } from '../../fragments'
 import {
@@ -65,22 +65,22 @@ export const Restaurants = () => {
     return (
         <div>
             <title>Home | Fantasy Eats</title>
-            <form
+            {/* <form
                 onSubmit={handleSubmit(onSearchSubmit)}
-                className="bg-gray-800 w-full py-40 flex items-center justify-center"
+                className=" w-full py-4 flex items-center justify-center"
             >
                 <input
                     {...register('searchTerm', { required: true, min: 3 })}
                     name="searchTerm"
                     type="Search"
-                    className="input bg-white rounded-md border-0 w-3/4 md:w-3/12"
+                    className="input bg-white rounded-md border-0 w-3/4 md:w-2xs"
                     placeholder="Search restaurants..."
                 />
-            </form>
+            </form> */}
             {!loading && (
-                <div className="max-w-screen-2xl pb-20 mx-auto mt-8">
+                <div className="max-w-screen-2xl mx-auto mt-2">
                     <div className="flex justify-around max-w-sm mx-auto ">
-                        {data?.allCategories.categories?.map((category) => (
+                        {/* {data?.allCategories.categories?.map((category) => (
                             <Link
                                 key={category.id}
                                 to={`/category/${category.slug}`}
@@ -91,14 +91,14 @@ export const Restaurants = () => {
                                             src={`data:image/svg+xml,${category.coverImg}`}
                                         />
                                     </div>
-                                    <span className="mt-1 text-sm text-center font-medium">
+                                    <span className="mt-1 text-xs text-center ">
                                         {category.name}
                                     </span>
                                 </div>
                             </Link>
-                        ))}
+                        ))} */}
                     </div>
-                    <div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
+                    <div className="grid  md:grid-cols-3 gap-x-5 gap-y-5">
                         {data?.restaurants.results?.map((restaurant) => (
                             <Restaurant
                                 key={restaurant.id}
@@ -109,7 +109,7 @@ export const Restaurants = () => {
                             />
                         ))}
                     </div>
-                    <div className="grid grid-cols-3 text-center max-w-md items-center mx-auto mt-10">
+                    <div className="grid grid-cols-3 text-center max-w-md items-center mx-auto">
                         {page > 1 ? (
                             <button
                                 onClick={onPrevPageClick}

@@ -6,14 +6,6 @@ interface IHeaderProps {
 }
 
 export const Header: React.FC = () => {
-    // const { data } = useMe()
-
-    // const [loginToken, setLoginToken] = useState('')
-
-    // useEffect(() => {
-    //     localStorage.setItem(LOCALSTORAGE_TOKEN, '')
-    // }, [loginToken])
-
     const logOutAndReload = () => {
         localStorage.setItem(LOCALSTORAGE_TOKEN, '')
         window.location.href = '/'
