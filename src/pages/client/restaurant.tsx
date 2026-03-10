@@ -185,24 +185,23 @@ export const Restaurant = () => {
                 {data?.restaurant.restaurant?.name || ''} | Fantasy Eats
             </title>
             <div
-                className=" bg-gray-800 bg-center bg-cover py-36 xl:py-48 h-32 w-full"
+                className=" bg-gray-800 bg-center bg-cover h-72 w-full"
                 style={{
                     backgroundImage: `url(${data?.restaurant.restaurant?.coverImg})`,
                 }}
-            >
-                <div className="bg-white xl:w-3/12 py-8 pl-8">
-                    <h4 className="text-2xl mb-3">
-                        {data?.restaurant.restaurant?.name}
-                    </h4>
-                    <h5 className="text-sm font-light mb-2">
-                        {data?.restaurant.restaurant?.category?.name}
-                    </h5>
-                    <h6 className="text-sm font-light">
-                        {data?.restaurant.restaurant?.address}
-                    </h6>
-                </div>
+            ></div>
+            <div className="bg-white  py-6">
+                <h4 className="text-2xl mb-3">
+                    {data?.restaurant.restaurant?.name}
+                </h4>
+                <h5 className="text-sm font-light mb-2">
+                    {data?.restaurant.restaurant?.category?.name}
+                </h5>
+                <h6 className="text-sm font-light">
+                    {data?.restaurant.restaurant?.address}
+                </h6>
             </div>
-            <div className="container pb-32 flex flex-col items-end mt-20">
+            <div className="container flex flex-col items-end">
                 {!orderStarted && (
                     <button onClick={triggerStartOrder} className="btn px-10">
                         Start Order
@@ -211,21 +210,21 @@ export const Restaurant = () => {
                 {orderStarted && (
                     <div className="flex items-center">
                         <button
-                            onClick={triggerConfirmOrder}
-                            className="btn px-10 mr-3"
+                            onClick={triggerCancelOrder}
+                            className="btn px-10 mr-4"
                         >
-                            Confirm Order
+                            Cancel
                         </button>
                         <button
-                            onClick={triggerCancelOrder}
-                            className="btn px-10 bg-black hover:bg-black"
+                            onClick={triggerConfirmOrder}
+                            className="btn px-10"
                         >
-                            Cancel Order
+                            Confirm
                         </button>
                     </div>
                 )}
 
-                <div className="container w-full grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
+                <div className="container w-full grid md:grid-cols-3 gap-x-5 gap-y-5 mt-4">
                     {data?.restaurant.restaurant?.menu.map((dish, index) => (
                         <Dish
                             isSelected={isSelected(dish.id)}

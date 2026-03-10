@@ -65,18 +65,25 @@ export const Restaurants = () => {
     return (
         <div>
             <title>Home | Fantasy Eats</title>
-            {/* <form
+            <form
                 onSubmit={handleSubmit(onSearchSubmit)}
-                className=" w-full py-4 flex items-center justify-center"
+                className="w-full flex items-center justify-center"
             >
                 <input
                     {...register('searchTerm', { required: true, min: 3 })}
                     name="searchTerm"
                     type="Search"
-                    className="input bg-white rounded-md border-0 w-3/4 md:w-2xs"
+                    className="input bg-white rounded-md w-3/4 md:w-2xs"
+                    style={{
+                        // lineHeight: '2rem',
+                        fontSize: '1.1rem',
+                        paddingBottom: '0',
+                        paddingTop: '0.5rem',
+                        marginBottom: '1rem',
+                    }}
                     placeholder="Search restaurants..."
                 />
-            </form> */}
+            </form>
             {!loading && (
                 <div className="max-w-screen-2xl mx-auto mt-2">
                     <div className="flex justify-around max-w-sm mx-auto ">

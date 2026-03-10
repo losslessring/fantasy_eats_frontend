@@ -27,12 +27,12 @@ export const DishOption: React.FC<IDishOptionProps> = ({
     return (
         <span
             onClick={onClick}
-            className={`border px-2 py-1 ${
-                isSelected ? 'border-gray-800' : 'hover:border-gray-800'
+            className={` px-2 py-1  hover:bg-orange-200 ${
+                isSelected ? 'bg-orange-200' : ''
             }`}
         >
             <span className="mr-2">{name}</span>
-            {<span className="text-sm opacity-75">(${extra})</span>}
+            {<span className="text-sm opacity-75">g {extra}</span>}
         </span>
     )
 }
